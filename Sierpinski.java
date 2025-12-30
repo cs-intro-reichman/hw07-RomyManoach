@@ -7,12 +7,37 @@ public class Sierpinski {
 	
 	// Draws a Sierpinski triangle of depth n on the standard canvass.
 	public static void sierpinski (int n) {
-		//// Replace this comment with your code
+		double x1 = 0.0, y1 = 0.0;
+        double x2 = 1.0, y2 = 0.0;
+        double x3 = 0.5, y3 = Math.sqrt(3) / 2.0;
+
+		sierpinski(n, x1, x2, x3, y1, y2, y3);
+
 	}
 	
 	// Does the actual drawing, recursively.
 	private static void sierpinski(int n, double x1, double x2, double x3,
 		                                 double y1, double y2, double y3) {
-		//// Replace this comment with your code
+		if (n == 0) {
+            return;
+        }
+
+		StdDraw.line(x1, y1, x2, y2);
+        StdDraw.line(x2, y2, x3, y3);
+        StdDraw.line(x3, y3, x1, y1);
+
+		double midX12 = (x1 + x2) / 2.0;
+        double midY12 = (y1 + y2) / 2.0;
+        
+        double midX23 = (x2 + x3) / 2.0;
+        double midY23 = (y2 + y3) / 2.0;
+        
+        double midX31 = (x3 + x1) / 2.0;
+        double midY31 = (y3 + y1) / 2.0;
+
+		sierpinski(n - 1, x1, midX12, midX31, y1, midY12, midY31);
+		sierpinski(n - 1, midX12, x2, midX23, midY12, y2, midY23);
+		sierpinski(n - 1, midX31, midX23, x3, midY31, midY23, y3);
+
 	}
 }
